@@ -1,0 +1,275 @@
+{
+  "name": "minecraft-bedrock-custom",
+  "display": "Better Minecraft Bedrock",
+  "type": "minecraft-bedrock",
+  "install": [
+    {
+      "files": [
+        "https://github.com/LazyBirb/minecraft-bedrock-pufferpanel/raw/refs/heads/master/install"
+      ],
+      "type": "download"
+    },
+    {
+      "commands": [
+        "bash ./install",
+        "unzip -o server.zip",
+        "chmod +x bedrock_server"
+      ],
+      "type": "command"
+    },
+    {
+      "target": "server.properties",
+      "text": "server-name=${server-name}\ngamemode=${gamemode}\nforce-gamemode=${force-gamemode}\ndifficulty=${difficulty}\nallow-cheats=${allow-cheats}\nmax-players=${max-players}\nonline-mode=${online-mode}\nallow-list=${allow-list}\nserver-port=${server-port}\nserver-portv6=${server-portv6}\nenable-lan-visibility=${enable-lan-visibility}\nview-distance=${view-distance}\ntick-distance=${tick-distance}\nplayer-idle-timeout=${player-idle-timeout}\nmax-threads=${max-threads}\nlevel-name=${level-name}\nlevel-seed=${level-seed}\ndefault-player-permission-level=${default-player-permission-level}\ntexturepack-required=${texturepack-required}\ncontent-log-file-enabled=${content-log-file-enabled}\nchat-restriction=${chat-restriction}\ndisable-player-interaction=${disable-player-interaction}\nclient-side-chunk-generation-enabled=${client-side-chunk-generation-enabled}\n",
+      "type": "writefile"
+    }
+  ],
+  "run": {
+    "stop": "stop",
+    "command": "./bedrock_server",
+    "workingDirectory": "",
+    "pre": [
+      {
+        "files": [
+          "https://raw.githubusercontent.com/LazyBirb/minecraft-bedrock-pufferpanel/refs/heads/master/update"
+        ],
+        "type": "download"
+      },
+      {
+        "commands": [
+          "bash ./update"
+        ],
+        "type": "command"
+      },
+      {
+        "target": "server.properties",
+        "text": "server-name=${server-name}\ngamemode=${gamemode}\nforce-gamemode=${force-gamemode}\ndifficulty=${difficulty}\nallow-cheats=${allow-cheats}\nmax-players=${max-players}\nonline-mode=${online-mode}\nallow-list=${allow-list}\nserver-port=${server-port}\nserver-portv6=${server-portv6}\nenable-lan-visibility=${enable-lan-visibility}\nview-distance=${view-distance}\ntick-distance=${tick-distance}\nplayer-idle-timeout=${player-idle-timeout}\nmax-threads=${max-threads}\nlevel-name=${level-name}\nlevel-seed=${level-seed}\ndefault-player-permission-level=${default-player-permission-level}\ntexturepack-required=${texturepack-required}\ncontent-log-file-enabled={content-log-file-enabled}\nchat-restriction=${chat-restriction}\ndisable-player-interaction=${disable-player-interaction}\nclient-side-chunk-generation-enabled={client-side-chunk-generation-enabled}\n",
+        "type": "writefile"
+      }
+    ],
+    "post": [],
+    "environmentVars": {
+      "LD_LIBRARY_PATH": "."
+    }
+  },
+  "data": {
+    "allow-cheats": {
+      "type": "boolean",
+      "desc": "Allowing cheats like commands",
+      "display": "Allow Cheats",
+      "required": true,
+      "value": "false"
+    },
+    "allow-list": {
+      "type": "boolean",
+      "desc": "Enable allowlist.json for certain people to join",
+      "display": "Allowlist / Whitelist",
+      "required": true,
+      "value": "false"
+    },
+    "chat-restriction": {
+      "type": "option",
+      "display": "Chat Restrictions",
+      "required": true,
+      "options": [
+        {
+          "value": "None",
+          "display": "None"
+        },
+        {
+          "value": "Dropped",
+          "display": "Dropped, inform there is no chat available"
+        },
+        {
+          "value": "Disabled",
+          "display": "Disabled, no chat UI available"
+        }
+      ]
+    },
+    "client-side-chunk-generation-enabled": {
+      "type": "boolean",
+      "desc": "Allow Clients to generate Chunks visually only to match their View Distance",
+      "display": "Visual Client Chunk Generation",
+      "required": true,
+      "value": "true"
+    },
+    "content-log-file-enabled": {
+      "type": "boolean",
+      "display": "Content Log",
+      "required": true,
+      "value": "true"
+    },
+    "default-player-permission-level": {
+      "type": "option",
+      "display": "Default Permission",
+      "required": true,
+      "options": [
+        {
+          "value": "visitor",
+          "display": "Visitor"
+        },
+        {
+          "value": "member",
+          "display": "Member"
+        },
+        {
+          "value": "operator",
+          "display": "Operator"
+        }
+      ]
+    },
+    "difficulty": {
+      "type": "option",
+      "desc": "Difficulty of the world",
+      "display": "Difficulty",
+      "options": [
+        {
+          "value": "peaceful",
+          "display": "Peaceful"
+        },
+        {
+          "value": "easy",
+          "display": "Easy"
+        },
+        {
+          "value": "normal",
+          "display": "Normal"
+        },
+        {
+          "value": "hard",
+          "display": "Hard"
+        }
+      ]
+    },
+    "disable-player-interaction": {
+      "type": "boolean",
+      "display": "Disable Player Interactions",
+      "required": true,
+      "value": "false"
+    },
+    "enable-lan-visibility": {
+      "type": "boolean",
+      "display": "Enable LAN Visibility",
+      "required": true,
+      "value": "true"
+    },
+    "force-gamemode": {
+      "type": "boolean",
+      "desc": " Enforce the default gamemode to players every time when joining",
+      "display": "Force Gamemode",
+      "required": true,
+      "value": "false"
+    },
+    "gamemode": {
+      "type": "option",
+      "desc": "Sets the default gamemode when joining",
+      "display": "Gamemode",
+      "required": true,
+      "options": [
+        {
+          "value": "survival",
+          "display": "Survival"
+        },
+        {
+          "value": "creative",
+          "display": "Creative"
+        },
+        {
+          "value": "adventure",
+          "display": "Adventure"
+        }
+      ]
+    },
+    "level-name": {
+      "type": "string",
+      "display": "World Name",
+      "required": true,
+      "value": "DefaultWorld"
+    },
+    "level-seed": {
+      "type": "integer",
+      "display": "World Seed"
+    },
+    "max-players": {
+      "type": "integer",
+      "desc": "Maximum amount of players joining the server",
+      "display": "Max. Players",
+      "required": true,
+      "value": "10"
+    },
+    "max-threads": {
+      "type": "integer",
+      "display": "Max Threads",
+      "required": true,
+      "value": "0"
+    },
+    "online-mode": {
+      "type": "boolean",
+      "desc": "Use Xbox Live authentication when joining (recommended)",
+      "display": "Online Mode",
+      "required": true,
+      "value": "true"
+    },
+    "player-idle-timeout": {
+      "type": "integer",
+      "display": "Player Idle",
+      "required": true,
+      "value": "30"
+    },
+    "server-name": {
+      "type": "string",
+      "desc": "Server name, without any semicolons",
+      "display": "Server name",
+      "required": true,
+      "value": "Dedicated Server"
+    },
+    "server-port": {
+      "type": "integer",
+      "display": "Server Port IPv4",
+      "required": true,
+      "value": "19132"
+    },
+    "server-portv6": {
+      "type": "integer",
+      "display": "Server Port IPv6",
+      "required": true,
+      "value": "19133"
+    },
+    "texturepack-required": {
+      "type": "boolean",
+      "display": "Force Texturepack",
+      "required": true,
+      "value": "false"
+    },
+    "tick-distance": {
+      "type": "integer",
+      "desc": "Value ranges between 4-12",
+      "display": "Tick Distance",
+      "required": true,
+      "value": "6"
+    },
+    "view-distance": {
+      "type": "integer",
+      "desc": "Minimum of 5",
+      "display": "View Distance",
+      "required": true,
+      "value": "32"
+    }
+  },
+  "environment": {
+    "type": "standard"
+  },
+  "supportedEnvironments": [
+    {
+      "type": "standard"
+    }
+  ],
+  "requirements": {
+    "binaries": [
+      "unzip",
+      "curl",
+      "bash"
+    ],
+    "os": "linux",
+    "arch": "amd64"
+  }
+}
