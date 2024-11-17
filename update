@@ -1,0 +1,13 @@
+#!/bin/bash
+RandNum=$((1 + $RANDOM % 5000))
+curl -H "Accept-Encoding: identity" -H "Accept-Language: en" -L -A "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.$RandNum.212 Safari/537.36" -o $HOME/version.html.temp https://www.minecraft.net/en-us/download/server/bedrock
+MCBE_DL=$(grep -o 'https://www.minecraft.net/bedrockdedicatedserver/bin-linux/[^"]*' $HOME/version.html.temp)
+rm version.html.temp
+curl -H "Accept-Encoding: identity" -H "Accept-Language: en" -L -A "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.$RandNum.212 Safari/537.36" -o ./server.zip $MCBE_DL
+cp permissions.json permissions.json.bak
+cp allowlist.json allowlist.json.bak
+unzip -o server.zip
+chmod +x bedrock_server
+mv permissions.json.bak permissions.json
+mv allowlist.json.bak allowlist.json
+rm server.properties
