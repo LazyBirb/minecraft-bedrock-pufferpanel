@@ -4,5 +4,3 @@ MCBE_DL=$(grep -o 'https://www.minecraft.net/bedrockdedicatedserver/bin-linux/[^
 MCBE_VERSION=$(echo "$MCBE_DL" | sed -e 's/.*server-//g' -e 's/.zip//')
 rm version.html.temp
 wget -U "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.$RandNum.212 Safari/537.36" $MCBE_DL
-mv bedrock-server-${MCBE_VERSION}*.* server.zip
-
