@@ -1,4 +1,8 @@
 RandNum=$((1 + $RANDOM % 5000))
 curl -H "Accept-Encoding: identity" -H "Accept-Language: en" -L -A "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.$RandNum.212 Safari/537.36" -o $HOME/version.html.temp https://www.minecraft.net/en-us/download/server/bedrock
 MCBE_DL=$(grep -o 'https://www.minecraft.net/bedrockdedicatedserver/bin-linux/[^"]*' $HOME/version.html.temp)
-wget -U "Accept-Encoding: identity" -H "Accept-Language: en" -L -A "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.$RandNum.212 Safari/537.36" $MCBE_DL -O server.zip
+MCBE_VERSION=$(echo "$LatestURL" | sed -e 's/.*server-//g' -e 's/.zip//')
+rm version.html.temp
+wget -U "Accept-Encoding: identity" -H "Accept-Language: en" -L -A "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.$RandNum.212 Safari/537.36" $MCBE_DL
+mv bedrock-server-${MCBE_VERSION}*.* server.zip
+
